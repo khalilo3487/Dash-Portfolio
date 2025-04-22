@@ -1,0 +1,724 @@
+/* 
+  style.css - Single Integrated File 
+  Place this file in your "assets" folder.
+  
+  Sections:
+    1. Root Variables & Global Resets
+    2. Background Video & Overlay
+    3. Navbar & Tabs
+    4. Scroll-Triggered Animations
+    5. Buttons & Ripple
+    6. Scroll-Up Button
+    7. Cards & Misc. Components
+    8. Media Queries & Headings
+    9. Icon Hover
+    10. Modern Skill Bars
+*/
+
+/*----------------------------------
+  1. ROOT VARIABLES & GLOBAL RESETS
+----------------------------------*/
+:root {
+  /* Remove accent color references to avoid blue. */
+  --text-primary: #222;
+  --text-secondary: #444;
+  --text-on-dark: #f0f0f0;
+  --text-on-light: #222;
+  --bg-light: #f0f0f0;
+  --bg-dark: #222;
+  
+  /* Instead of a blue accent, use a subtle translucent white or silver. */
+  --accent-color: rgba(255, 255, 255, 0.3);
+  --accent-hover: rgba(255, 255, 255, 0.4);
+
+  --transition-standard: 0.3s ease;
+  --shadow-standard: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --breakpoint-md: 768px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', 'Arial', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-light);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 24px;  /* increased from the default 16px */
+}
+
+/*----------------------------------
+  2. BACKGROUND VIDEO & OVERLAY
+----------------------------------*/
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.2);
+  z-index: -1;
+}
+
+/*----------------------------------
+  3. NAVBAR & TABS
+----------------------------------*/
+.navbar {
+  /* Use a subtle translucent background instead of a solid color */
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden;
+  box-shadow: var(--shadow-standard);
+  transition: none !important;
+  margin-bottom: 1rem; /* spacing below the navbar */
+}
+
+/* Text & links inside the navbar */
+.navbar,
+.navbar a,
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: #fff !important; /* Use white text for contrast on transparent background */
+  font-weight: 500;
+  transition: none !important;
+}
+
+.navbar:hover,
+.navbar a:hover,
+.navbar-brand:hover,
+.navbar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+  transition: none !important;
+}
+
+/* Tabs container with a glassy effect */
+.tabs-container {
+  display: flex;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  margin: 0 auto;
+  max-width: 1200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tabs-container .tab {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: none;
+  color: #fff !important;
+  margin: 1rem;
+  padding: 0.75rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-transform: uppercase;
+  border-radius: 8px;
+}
+
+.tabs-container .tab:hover {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.tabs-container .tab-selected {
+  background: rgba(255, 255, 255, 0.3) !important;
+  border-bottom: 2px solid var(--accent-hover);
+  color: #fff !important;
+  font-weight: 600;
+  transform: none !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/*----------------------------------
+  4. SCROLL-TRIGGERED ANIMATIONS
+----------------------------------*/
+.section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+  padding: 4rem 2rem;
+  border-radius: 8px;
+}
+
+.section.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-left {
+  transform: translateX(-50px);
+}
+.fade-in-right {
+  transform: translateX(50px);
+}
+.zoom-in {
+  transform: scale(0.9);
+}
+.fade-in-left.animate,
+.fade-in-right.animate,
+.zoom-in.animate {
+  transform: translateX(0) scale(1);
+}
+
+/*----------------------------------
+  5. BUTTONS & RIPPLE
+----------------------------------*/
+.btn-custom {
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 0.85rem 2rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 4px;
+  box-shadow: var(--shadow-standard);
+  transition: all var(--transition-standard);
+  letter-spacing: 0.5px;
+}
+
+.btn-custom:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-custom.outline {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid var(--accent-color);
+}
+
+.btn-custom.outline:hover {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.btn-custom.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-on-dark);
+}
+
+.btn-custom:after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 255, 255, 0.3);
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.6s, opacity 1s;
+  pointer-events: none;
+}
+
+.btn-custom:active:after {
+  transform: translate(-50%, -50%) scale(2);
+  opacity: 0;
+}
+
+/*----------------------------------
+  6. SCROLL-UP BUTTON
+----------------------------------*/
+.scroll-up-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent-color);
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: all var(--transition-standard);
+  z-index: 999;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-standard);
+  visibility: hidden;
+}
+
+.scroll-up-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-5px);
+}
+
+.scroll-up-btn:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-5px) scale(1.1);
+}
+
+/*----------------------------------
+  7. CARDS & MISC. COMPONENTS
+----------------------------------*/
+/* General card styles remain mostly the same */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-standard);
+  transition: transform var(--transition-standard), box-shadow var(--transition-standard);
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-dark {
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+}
+
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+/* Glassy effect for smaller project cards */
+.card-glass {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  color: #000 !important;
+  transform: perspective(1000px) scale(0.9);
+  transform-origin: center center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-glass:hover {
+  transform: perspective(1000px) scale(1.05) translateZ(20px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+}
+
+/* Main container card with dynamic snake border effect + overlay for readability */
+.my-card {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transform: scale(0.9) perspective(1000px) translateZ(0);
+  transform-origin: top center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Subtle hover scale */
+.my-card:hover {
+  transform: scale(0.95) translateY(-3px);
+}
+
+/* The "snake" border is on ::before, now using cooler colors */
+.my-card::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  /* More intense turquoise, less pink */
+  background: linear-gradient(
+    -45deg,
+    rgba(64, 224, 208, 0.65),
+    rgba(238, 33, 156, 0.35)
+  );
+  background-size: 400% 400%;
+  border-radius: inherit;
+  z-index: -2;
+  animation: snake 10s linear infinite alternate;
+}
+
+
+/* Subtle dark overlay for better text readability */
+.my-card::after {
+  content: "";
+  position: absolute;
+  top: 0; 
+  left: 0;
+  right: 0; 
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3); /* 30% black overlay */
+  z-index: -1;
+}
+
+/* Keyframes for the snake border animation */
+@keyframes snake {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Cooler pastel text colors inside .my-card */
+.my-card h2,
+.my-card h4 {
+  color: #A7C7E7; /* Light pastel blue */
+}
+
+.my-card p {
+  color: #E0F7FA; /* Light cyan for contrast */
+}
+
+.my-card li,
+.my-card h3 {
+  color: #B2EBF2; /* Subtle pale teal */
+}
+
+.my-card a {
+  color: #81D4FA; /* Soft pastel blue for links */
+  text-decoration: underline;
+}
+
+.my-card a:hover {
+  color: #4FC3F7; /* Slightly darker blue on hover */
+}
+
+/*----------------------------------
+  8. MEDIA QUERIES & HEADINGS
+----------------------------------*/
+@media (max-width: var(--breakpoint-md)) {
+  .parallax {
+    background-attachment: scroll;
+    min-height: 60vh;
+  }
+  .parallax-content {
+    font-size: 1.8rem;
+    padding: 1.5rem;
+  }
+  .section {
+    padding: 3rem 1.5rem;
+  }
+  .scroll-up-btn {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+/* Default headings outside .my-card context remain black */
+.section h2,
+.section h4,
+.card h2,
+.card h4 {
+  color: #000 !important;
+}
+
+.bg-dark h2.light-text,
+.bg-dark h4.light-text {
+  color: #fff !important;
+}
+
+/*----------------------------------
+  9. ICON HOVER
+----------------------------------*/
+.icon,
+.fa,
+.fas,
+.far,
+.fab {
+  transition: transform 0.3s ease;
+}
+
+.icon:hover,
+.fa:hover,
+.fas:hover,
+.far:hover,
+.fab:hover {
+  transform: scale(1.3);
+}
+
+/*----------------------------------
+  10. MODERN SKILL BARS
+----------------------------------*/
+.skill-section {
+  margin-bottom: 2rem;
+}
+
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skill-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.skill-title {
+  width: 200px;
+  font-weight: 600;
+}
+
+/* Progress Bar Container */
+.progress-bar {
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 0%;
+  max-width: 500px;
+  height: 10px;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated fill for progress bars */
+.progress-bar::before {
+  content: "";
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.2)
+  );
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.2s ease;
+}
+
+.progress-bar.animate::before {
+  transform: scaleX(var(--skill-scale));
+}
+
+/* Percentage label for progress bars */
+.progress-bar::after {
+  content: attr(data-skill-level) "%";
+  position: absolute;
+  right: 10px;
+  top: -25px;
+  font-size: 0.85rem;
+  color: #333;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.progress-bar.animate::after {
+  opacity: 1;
+}
+
+/* Kontaktformular Wrapper */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  margin-top: 1rem;
+}
+
+.contact-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #000;
+  background: #fff;
+}
+
+.contact-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #000;
+  background: #fff;
+  resize: vertical;
+}
+
+.contact-submit-button {
+  background-color: #3498db !important;
+  color: #fff;
+  border: none;
+  padding: 0.85rem 2rem;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: var(--shadow-standard);
+  transition: all 0.3s ease;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.contact-submit-button:hover {
+  background-color: #2980b9 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+
+/*----------------------------------
+  3D "Deck" style with NO overlap (smooth transition)
+----------------------------------*/
+.deck-container {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+  margin-top: 1rem;
+  overflow: visible;
+}
+
+/* Styling for each card (16:9, bigger size, smooth scale) */
+.deck-card {
+  position: absolute;
+  width: 400px;
+  height: 225px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.5s ease-in-out, z-index 0.3s ease-in-out, box-shadow 0.5s ease-in-out;
+  transform-origin: center center;
+}
+
+/* The image inside each card */
+.deck-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Styling for the images in stack - increased spacing to prevent overlap */
+.deck-card:nth-child(1) {
+  transform: rotateY(-12deg) translateX(-800px) translateY(0px);
+  z-index: 1;
+}
+.deck-card:nth-child(2) {
+  transform: rotateY(-6deg) translateX(-400px) translateY(0px);
+  z-index: 2;
+}
+.deck-card:nth-child(3) {
+  transform: rotateY(0deg) translateX(0px) translateY(0px);
+  z-index: 3;
+}
+.deck-card:nth-child(4) {
+  transform: rotateY(6deg) translateX(400px) translateY(0px);
+  z-index: 2;
+}
+.deck-card:nth-child(5) {
+  transform: rotateY(12deg) translateX(800px) translateY(0px);
+  z-index: 1;
+}
+
+/* On hover: preserve original position, add scale, prevent Y-shift */
+.deck-card:nth-child(1):hover {
+  transform: rotateY(-12deg) translateX(-800px) translateY(0px) scale(1.2);
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.deck-card:nth-child(2):hover {
+  transform: rotateY(-6deg) translateX(-400px) translateY(0px) scale(1.2);
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.deck-card:nth-child(3):hover {
+  transform: rotateY(0deg) translateX(0px) translateY(0px) scale(1.2);
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.deck-card:nth-child(4):hover {
+  transform: rotateY(6deg) translateX(400px) translateY(0px) scale(1.2);
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.deck-card:nth-child(5):hover {
+  transform: rotateY(12deg) translateX(800px) translateY(0px) scale(1.2);
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* Add some styling to the 'Zurück zu Projekten' buttons */
+button {
+  background: #3498db;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+
+.social-icons {
+  display: flex;
+  justify-content: flex-start; /* Aligns items to the left */
+  gap: 1rem;
+}
+
+
+.social-icons a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #4FC3F7; /* Hover effect for social media icons */
+}

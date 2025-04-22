@@ -1,0 +1,16 @@
+api==0.0.7
+dash==2.18.2
+dash_bootstrap_components==2.0.2
+database==0.6.0
+keras_rl2==1.0.5
+notification==0.2.1
+numpy==2.2.5
+pandas==2.2.3
+plotly==5.22.0
+requests==2.32.3
+risk==0.1.4
+strategies==0.2.3
+utils==1.0.2
+websocket_client==1.8.0
+gunicorn
+dash-tools
